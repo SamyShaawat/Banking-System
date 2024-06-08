@@ -21,4 +21,15 @@ class BankAccount:
         if self.balance >= amount:
             return
         else:
-            raise BalanceException("\nSorry, account '{self.name}' only has a balance of ${self.balance:.2f}")
+            raise BalanceException(f"\nSorry, account '{self.name}' only has a balance of ${self.balance:.2f}")
+    
+    def withdraw(self, amount):
+        try:
+            self.viableTransaction(amount)
+            self.balance -= amount
+            print(
+                f"\nWithdrawal Completed. \nYou withdrew ${amount:.2f} from {self.name} account"
+            )
+            self.getBalance()
+        except BalanceException as error:
+            print(f'\nWithdraw interrupted: {error}')

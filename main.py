@@ -9,3 +9,4 @@ Mohamed.getBalance()
 
 Samy.deposit(200)
 
+Mohamed.withdraw(5000)
