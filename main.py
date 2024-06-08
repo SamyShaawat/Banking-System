@@ -12,4 +12,11 @@ Samy.deposit(200)
 Mohamed.withdraw(1000)
 
 
-Samy.transfer(30000,Mohamed)
+Samy.transfer(30000, Mohamed)
+
+Ahmed = InterestRewardsAccount(1000, "Ahmed")
+Ahmed.getBalance()
+
+Ahmed.deposit(200)
+
+Ahmed.transfer(200, Samy)

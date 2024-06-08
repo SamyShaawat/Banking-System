@@ -1,6 +1,7 @@
 class BalanceException(Exception):
     pass
 
+
 class BankAccount:
     def __init__(self, initialAmount, accountName):
         self.balance = initialAmount
@@ -16,13 +17,15 @@ class BankAccount:
             f"\nDeposit Completed. \nYou deposited ${amount:.2f} in  {self.name} account"
         )
         self.getBalance()
-    
+
     def viableTransaction(self, amount):
         if self.balance >= amount:
             return
         else:
-            raise BalanceException(f"\nSorry, account '{self.name}' only has a balance of ${self.balance:.2f}")
-    
+            raise BalanceException(
+                f"\nSorry, account '{self.name}' only has a balance of ${self.balance:.2f}"
+            )
+
     def withdraw(self, amount):
         try:
             self.viableTransaction(amount)
@@ -32,14 +35,21 @@ class BankAccount:
             )
             self.getBalance()
         except BalanceException as error:
-            print(f'\nWithdraw interrupted. ❌ {error}')
-    
+            print(f"\nWithdraw interrupted. ❌ {error}")
+
     def transfer(self, amount, account):
         try:
-            print('\n******************\n\nBegining Transfer.. 🚀')
+            print("\n******************\n\nBegining Transfer.. 🚀")
             self.viableTransaction(amount)
             self.withdraw(amount)
             account.deposit(amount)
-            print('\nTransfer Completed! ✅\n\n******************')
+            print("\nTransfer Completed! ✅\n\n******************")
         except BalanceException as error:
-            print(f'\nTransfer interrupted. ❌ {error}')
+            print(f"\nTransfer interrupted. ❌ {error}")
+
+
+class InterestRewardsAccount(BankAccount):
+    def deposit(self, amount):
+        self.balance = self.balance + (amount * 1.05)
+        print("\nDeposit Completed. ")
+        self.getBalance()
